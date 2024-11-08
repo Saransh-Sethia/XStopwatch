@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Button from "./components/Button";
+import Display from "./components/Display";
 
 function App() {
+  const [time, setTime] = useState({
+    s: 0,
+    m: 0
+});
+const [interv, setInterv] = useState();
+const [status, setStatus] = useState(0)
+
+let updatedS = time.s;
+let updatedM = time.m;
+
+const run = () => {
+  if(updatedS === 60){
+    updatedM++;
+    updatedS = 0
+  }
+
+  updatedS++;
+  return setTime({
+    s: updatedS,
+    m: updatedM
+  })
+};
+
+const start = () => {
+  run();
+  setStatus(1);
+  setInterv(setInterval(run,1000))
+  
+};
+
+const stop = () => {
+  clearInterval(interv);
+  setStatus(0);
+}
+
+const reset = () => {
+  setStatus(0);
+  clearInterval(interv)
+  setTime({s:0,m:0})
+}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Stopwatch</h1>
+      <Display time={time}/>
+      <Button start={start} stop={stop} reset={reset} status={status}/>
     </div>
   );
 }
