@@ -15,12 +15,13 @@ let updatedS = time.s;
 let updatedM = time.m;
 
 const run = () => {
+
   if(updatedS === 60){
     updatedM++;
     updatedS = 0
   }
 
-  updatedS++;
+  updatedS++
   return setTime({
     s: updatedS,
     m: updatedM
@@ -40,8 +41,9 @@ const stop = () => {
 }
 
 const reset = () => {
+  
+  clearInterval(interv);
   setStatus(0);
-  clearInterval(interv)
   setTime({s:0,m:0})
 }
   return (
