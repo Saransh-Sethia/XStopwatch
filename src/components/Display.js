@@ -4,7 +4,7 @@ const Display = ({time}) => {
 
   return (
     <div className='container'>
-      <p>Time: </p>
+      <p>Time:</p>
       <div className='time'>
       <p>{time.m}</p>
       :
