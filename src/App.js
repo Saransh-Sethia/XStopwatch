@@ -5,23 +5,29 @@ import Display from "./components/Display";
 
 function App() {
   const [time, setTime] = useState({
+    ms:0,
     s: 0,
     m: 0
 });
 const [interv, setInterv] = useState();
 const [status, setStatus] = useState(0)
 
+let updatedMs = time.ms;
 let updatedS = time.s;
 let updatedM = time.m;
 
 const run = () => {
 
-  if(updatedS === 65){
+  if(updatedMs === 100){
+    updatedS++;
+    updatedMs = 0
+  }
+  if(updatedS === 60){
     updatedM++;
     updatedS = 0
   }
 
-  updatedS++
+  updatedMs++
   return setTime({
     s: updatedS,
     m: updatedM
@@ -31,7 +37,7 @@ const run = () => {
 const start = () => {
   run();
   setStatus(1);
-  setInterv(setInterval(run,1000))
+  setInterv(setInterval(run,10))
   
 };
 
