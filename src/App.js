@@ -16,7 +16,7 @@ let updatedM = time.m;
 
 const run = () => {
 
-  if(updatedS === 60){
+  if(updatedS === 65){
     updatedM++;
     updatedS = 0
   }
